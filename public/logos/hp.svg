@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 60">
+  <!-- HP Blue square -->
+  <rect x="0" y="0" width="56" height="60" rx="6" fill="#0096D6"/>
+  <!-- HP letters -->
+  <text x="6" y="46" font-family="Arial,Helvetica,sans-serif" font-weight="900" font-size="44" fill="white">hp</text>
+  <!-- Hewlett Packard text -->
+  <text x="64" y="26" font-family="Arial,Helvetica,sans-serif" font-weight="600" font-size="14" fill="white" letter-spacing="0.3">Hewlett</text>
+  <text x="64" y="46" font-family="Arial,Helvetica,sans-serif" font-weight="600" font-size="14" fill="white" letter-spacing="0.3">Packard</text>
+</svg>

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 60">
+  <!-- 7 in green box -->
+  <rect x="0" y="0" width="50" height="60" rx="4" fill="#007B40"/>
+  <text x="8" y="50" font-family="Arial,Helvetica,sans-serif" font-weight="900" font-size="50" fill="white">7</text>
+  <!-- ELEVEN text -->
+  <text x="58" y="38" font-family="Arial,Helvetica,sans-serif" font-weight="700" font-size="20" fill="white" letter-spacing="2">ELEVEN</text>
+  <!-- Underline -->
+  <rect x="58" y="44" width="102" height="2" fill="#F47920"/>
+</svg>
