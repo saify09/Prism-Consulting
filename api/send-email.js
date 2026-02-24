@@ -1,18 +1,14 @@
-const nodemailer = require('nodemailer');
+import nodemailer from 'nodemailer';
 
 export default async function handler(req, res) {
-  // Handle CORS
-  res.setHeader('Access-Control-Allow-Credentials', true);
+  // Handle CORS preflight
+  res.setHeader('Access-Control-Allow-Credentials', 'true');
   res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT');
-  res.setHeader(
-    'Access-Control-Allow-Headers',
-    'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version'
-  );
+  res.setHeader('Access-Control-Allow-Methods', 'POST,OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
   if (req.method === 'OPTIONS') {
-    res.status(200).end();
-    return;
+    return res.status(200).end();
   }
 
   if (req.method !== 'POST') {
@@ -23,35 +19,35 @@ export default async function handler(req, res) {
 
   // Validation
   if (!name || !email || !message) {
-    return res.status(400).json({ message: 'Missing required fields' });
+    return res.status(400).json({ message: 'Missing required fields: name, email, message' });
   }
 
-  // Nodemailer Transporter
+  const emailUser = process.env.EMAIL_USER;
+  const emailPass = process.env.EMAIL_PASS ? process.env.EMAIL_PASS.replace(/\s+/g, '') : '';
+  const emailTo = process.env.EMAIL_TO || emailUser;
+
+  if (!emailUser || !emailPass) {
+    console.error('EMAIL_USER or EMAIL_PASS environment variable is not set.');
+    return res.status(500).json({ message: 'Server email configuration is missing.' });
+  }
+
+  // Nodemailer Transporter using Gmail SMTP
   const transporter = nodemailer.createTransport({
     host: 'smtp.gmail.com',
     port: 465,
     secure: true,
     auth: {
-      user: process.env.EMAIL_USER,
-      pass: process.env.EMAIL_PASS ? process.env.EMAIL_PASS.replace(/\s+/g, '') : ''
-    }
+      user: emailUser,
+      pass: emailPass,
+    },
   });
 
   const mailOptions = {
-    from: `"${name}" <${process.env.EMAIL_USER}>`,
-    to: process.env.EMAIL_TO || process.env.EMAIL_USER,
+    from: `"${name}" <${emailUser}>`,
+    to: emailTo,
     replyTo: email,
     subject: `Strategy Audit Request from ${company || 'Unknown Company'}`,
-    text: `
-      Name: ${name}
-      Email: ${email}
-      Company: ${company || 'N/A'}
-      Industry: ${industry || 'N/A'}
-      AI Maturity: ${maturity || 'N/A'}
-      
-      Message:
-      ${message}
-    `,
+    text: `Name: ${name}\nEmail: ${email}\nCompany: ${company || 'N/A'}\nIndustry: ${industry || 'N/A'}\nAI Maturity: ${maturity || 'N/A'}\n\nMessage:\n${message}`,
     html: `
       <h3>New Strategy Audit Request</h3>
       <p><strong>Name:</strong> ${name}</p>
@@ -62,14 +58,15 @@ export default async function handler(req, res) {
       <hr>
       <p><strong>Message:</strong></p>
       <p>${message.replace(/\n/g, '<br>')}</p>
-    `
+    `,
   };
 
   try {
     await transporter.sendMail(mailOptions);
+    console.log('Email sent successfully to', emailTo);
     return res.status(200).json({ message: 'Email sent successfully' });
   } catch (error) {
-    console.error('Error sending email:', error);
-    return res.status(500).json({ message: 'Failed to send email', error: error.toString() });
+    console.error('Nodemailer error:', error.message);
+    return res.status(500).json({ message: 'Failed to send email', error: error.message });
   }
 }
