@@ -63,13 +63,13 @@ const Header = () => {
             </Button>
           </nav>
 
-          {/* Mobile hamburger — always visible on white header */}
+          {/* Mobile hamburger — explicit dark color so always visible on white header */}
           <button
-            className="md:hidden p-2 rounded-lg text-foreground hover:bg-muted transition-colors"
+            className="md:hidden p-2 rounded-lg bg-white border border-gray-200 text-gray-900 hover:bg-gray-100 transition-colors shadow-sm"
             onClick={() => setMenuOpen((v) => !v)}
             aria-label="Toggle menu"
           >
-            {menuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            {menuOpen ? <X className="w-5 h-5 text-gray-900" /> : <Menu className="w-5 h-5 text-gray-900" />}
           </button>
         </div>
       </div>
