@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -11,7 +12,7 @@ const Header = () => {
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-background border-b border-border shadow-sm">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-white border-b border-border shadow-sm">
       <div className="section-container">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
@@ -45,6 +46,13 @@ const Header = () => {
               About
               <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-accent group-hover:w-full transition-all duration-300" />
             </button>
+            <Link
+              to="/blog"
+              className="text-foreground hover:text-accent transition-all duration-300 text-sm font-semibold relative group"
+            >
+              Blog
+              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-accent group-hover:w-full transition-all duration-300" />
+            </Link>
             <Button
               variant="default"
               size="sm"
@@ -55,7 +63,7 @@ const Header = () => {
             </Button>
           </nav>
 
-          {/* Mobile hamburger */}
+          {/* Mobile hamburger — always visible on white header */}
           <button
             className="md:hidden p-2 rounded-lg text-foreground hover:bg-muted transition-colors"
             onClick={() => setMenuOpen((v) => !v)}
@@ -68,7 +76,7 @@ const Header = () => {
 
       {/* Mobile dropdown */}
       {menuOpen && (
-        <div className="md:hidden bg-background border-t border-border shadow-md">
+        <div className="md:hidden bg-white border-t border-border shadow-md">
           <nav className="flex flex-col px-6 py-4 gap-4">
             <button
               onClick={() => scrollToSection("services")}
@@ -88,6 +96,13 @@ const Header = () => {
             >
               About
             </button>
+            <Link
+              to="/blog"
+              onClick={() => setMenuOpen(false)}
+              className="text-left text-foreground hover:text-accent text-sm font-semibold py-2 border-b border-border/50 transition-colors"
+            >
+              Blog
+            </Link>
             <Button
               variant="default"
               size="sm"

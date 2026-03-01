@@ -95,29 +95,17 @@ const AboutSection = () => {
 
             {/* Stats card — only shows floating on desktop; on mobile shown inline below */}
             <div className="hidden lg:block absolute -bottom-6 -right-6 bg-card rounded-xl p-6 border border-border shadow-lg">
-              <div className="flex items-center gap-6">
-                <div className="text-center">
-                  <p className="text-3xl font-bold text-accent">15+</p>
-                  <p className="text-sm text-muted-foreground">Years Experience</p>
-                </div>
-                <div className="w-px h-12 bg-border" />
-                <div className="text-center">
-                  <p className="text-3xl font-bold text-primary">100%</p>
-                  <p className="text-sm text-muted-foreground">HIPAA Ready</p>
-                </div>
+              <div className="text-center">
+                <p className="text-3xl font-bold text-accent">20+</p>
+                <p className="text-sm text-muted-foreground">Years Experience</p>
               </div>
             </div>
 
             {/* Mobile-only inline stats */}
-            <div className="lg:hidden mt-4 bg-card rounded-xl p-5 border border-border flex items-center justify-around gap-4">
+            <div className="lg:hidden mt-4 bg-card rounded-xl p-5 border border-border flex items-center justify-center gap-4">
               <div className="text-center">
-                <p className="text-2xl font-bold text-accent">15+</p>
+                <p className="text-2xl font-bold text-accent">20+</p>
                 <p className="text-xs text-muted-foreground">Years Experience</p>
-              </div>
-              <div className="w-px h-10 bg-border" />
-              <div className="text-center">
-                <p className="text-2xl font-bold text-primary">100%</p>
-                <p className="text-xs text-muted-foreground">HIPAA Ready</p>
               </div>
             </div>
           </div>

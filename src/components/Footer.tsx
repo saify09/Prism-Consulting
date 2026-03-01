@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const Footer = () => {
   return (
     <footer className="py-8 bg-primary text-primary-foreground">
@@ -41,6 +43,13 @@ const Footer = () => {
               Contact
               <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-accent group-hover:w-full transition-all duration-300"></span>
             </a>
+            <Link
+              to="/blog"
+              className="text-primary-foreground/80 hover:text-accent transition-all duration-300 text-sm font-medium relative group"
+            >
+              Blog
+              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-accent group-hover:w-full transition-all duration-300"></span>
+            </Link>
           </nav>
 
           {/* Copyright */}

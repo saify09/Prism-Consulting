@@ -154,7 +154,7 @@ const ContactSection = () => {
                 <p className="font-semibold text-foreground">
                   Prefer email?
                 </p>
-                <p className="text-accent">archanaushah@gmail.com</p>
+                <p className="text-accent">info@prismconsulting.ai</p>
               </div>
             </div>
           </div>
