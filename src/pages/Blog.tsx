@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 import { ArrowRight, Calendar, Clock, Tag } from "lucide-react";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 
 const posts = [
   {
@@ -69,6 +71,7 @@ const tagColors: Record<string, string> = {
 const BlogPage = () => {
   return (
     <div className="min-h-screen bg-background">
+      <Header />
       {/* Hero */}
       <section className="bg-primary py-20 pt-32 text-center">
         <div className="section-container max-w-3xl mx-auto">
@@ -158,6 +161,7 @@ const BlogPage = () => {
           </div>
         </div>
       </section>
+      <Footer />
     </div>
   );
 };
