@@ -18,31 +18,31 @@ const Footer = () => {
             </span>
           </div>
 
-          {/* Links */}
+          {/* Links — use /#section so they work from ANY page (e.g. /blog) */}
           <nav className="flex flex-wrap items-center justify-center gap-x-6 gap-y-3">
             <a
-              href="#services"
+              href="/#services"
               className="text-primary-foreground/80 hover:text-accent transition-all duration-300 text-sm font-medium relative group"
             >
               Services
               <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-accent group-hover:w-full transition-all duration-300"></span>
             </a>
             <a
-              href="#products"
+              href="/#products"
               className="text-primary-foreground/80 hover:text-accent transition-all duration-300 text-sm font-medium relative group"
             >
               Products
               <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-accent group-hover:w-full transition-all duration-300"></span>
             </a>
             <a
-              href="#about"
+              href="/#about"
               className="text-primary-foreground/80 hover:text-accent transition-all duration-300 text-sm font-medium relative group"
             >
               About
               <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-accent group-hover:w-full transition-all duration-300"></span>
             </a>
             <a
-              href="#contact"
+              href="/#contact"
               className="text-primary-foreground/80 hover:text-accent transition-all duration-300 text-sm font-medium relative group"
             >
               Contact
