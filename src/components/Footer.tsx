@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import prismLogo from "@/assets/prism-logo-icon.png";
 
 const Footer = () => {
   return (
@@ -7,10 +8,14 @@ const Footer = () => {
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           {/* Logo */}
           <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-accent flex items-center justify-center">
-              <span className="text-accent-foreground font-bold text-sm">PC</span>
-            </div>
-            <span className="font-semibold text-lg">Prism Consulting</span>
+            <img
+              src={prismLogo}
+              alt="Prism Consulting.AI logo"
+              className="w-8 h-8 object-contain brightness-0 invert"
+            />
+            <span className="font-bold text-base text-primary-foreground leading-tight">
+              PRISM <span className="text-accent">CONSULTING.AI</span>
+            </span>
           </div>
 
           {/* Links */}

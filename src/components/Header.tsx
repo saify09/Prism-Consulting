@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import { Link } from "react-router-dom";
+import prismLogo from "@/assets/prism-logo-icon.png";
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -17,10 +18,14 @@ const Header = () => {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-accent flex items-center justify-center">
-              <span className="text-accent-foreground font-bold text-sm">PC</span>
-            </div>
-            <span className="font-semibold text-lg text-foreground">Prism Consulting</span>
+            <img
+              src={prismLogo}
+              alt="Prism Consulting.AI logo"
+              className="w-9 h-9 object-contain"
+            />
+            <span className="font-bold text-base text-foreground leading-tight">
+              PRISM <span className="text-accent">CONSULTING.AI</span>
+            </span>
           </div>
 
           {/* Desktop nav */}
