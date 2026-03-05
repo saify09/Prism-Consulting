@@ -1,73 +1,155 @@
-# Welcome to your Lovable project
+# Prism Consulting - Corporate Website
 
-## Project info
+This repository contains the source code for the official website of **Prism Consulting**, an AI/ML and Product Strategy consultancy specializing in Agentic AI, federated machine learning, and enterprise intelligence for healthcare and finance.
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+## 🏗️ Architecture & Tech Stack
 
-## How can I edit this code?
+This project is built using modern web development standards, ensuring high performance, SEO optimization, and an excellent developer experience.
 
-There are several ways of editing your application.
+### Frontend
+- **Framework:** React 18
+- **Build Tool:** Vite 5
+- **Language:** TypeScript
+- **Styling:** Tailwind CSS
+- **Component Library:** shadcn/ui (Radix UI primitives)
+- **Routing:** React Router DOM (v6)
+- **State Management/Data Fetching:** TanStack Query (React Query)
+- **Icons:** Lucide React
 
-**Use Lovable**
+### Backend (Serverless)
+- **Platform:** Vercel Serverless Functions (Node.js)
+- **API File:** `/api/send-email.js`
+- **Email Service:** Nodemailer (configured for Hostinger SMTP)
+- **Architecture:** The contact form POSTs data to the serverless function, which then authenticates with Hostinger SMTP and sends an email to the configured inbox, bypassing front-end CORS and hiding email credentials securely.
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+---
 
-Changes made via Lovable will be committed automatically to this repo.
+## 🚀 Getting Started Locally
 
-**Use your preferred IDE**
+### Prerequisites
+- Node.js (v18 or higher)
+- npm or yarn
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+### Installation
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/saify09/Prism-Consulting.git
+   cd Prism-Consulting
+   ```
 
-Follow these steps:
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+3. **Set up Local Environment Variables**
+   Create a `.env` file in the root directory (this file is gitignored for security). Add the following variables to test local email functionality:
+   ```env
+   EMAIL_USER=your_smtp_email@domain.com
+   EMAIL_PASS=your_smtp_password
+   EMAIL_TO=recipient_email@gmail.com
+   PORT=5000
+   ```
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+4. **Start the Frontend Development Server**
+   ```bash
+   npm run dev
+   ```
+   *The site will be available at `http://localhost:8080` (or another port if 8080 is in use).*
 
-# Step 3: Install the necessary dependencies.
-npm i
+5. **Start the Local Backend (Optional, for testing emails locally)**
+   If you want to test the contact form locally without deploying to Vercel, run the local express server:
+   ```bash
+   node backend/server.js
+   ```
+   *Note: In production on Vercel, the site uses `/api/send-email.js` serverless function instead of this local server.*
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+---
+
+## 📦 Project Structure
+
+```text
+.
+├── api/
+│   └── send-email.js         # Vercel Serverless Function for the Contact Form
+├── backend/
+│   └── server.js             # Local testing server for emails (Not used in prod)
+├── public/                   # Static assets (Favicons, OG images, SVGs)
+├── src/
+│   ├── assets/               # Images and logo files used in components
+│   ├── components/           # Reusable React components (Header, Footer, Sections, UI)
+│   ├── hooks/                # Custom React hooks (e.g., use-toast, use-mobile)
+│   ├── lib/                  # Utility functions (e.g., tailwind merge)
+│   ├── pages/                # Page components (Index, Blog, NotFound)
+│   ├── App.tsx               # Main application router
+│   ├── index.css             # Global CSS and Tailwind directives
+│   └── main.tsx              # React DOM entry point
+├── vercel.json               # Vercel deployment configuration & API rewrites
+├── tailwind.config.ts        # Tailwind CSS configuration and theme colors
+├── vite.config.ts            # Vite build configuration
+└── package.json              # Project dependencies and scripts
 ```
 
-**Edit a file directly in GitHub**
+---
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## 🌐 Deployment (Vercel)
 
-**Use GitHub Codespaces**
+This project is optimized for deployment on **Vercel**. 
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+### 1. Vercel Configuration (`vercel.json`)
+The project includes a `vercel.json` file which handles:
+- **Build output routing:** Points to the `dist` folder generated by Vite.
+- **Serverless API:** Routes `/api/(.*)` requests to the Node.js functions in the `/api` directory.
+- **SPA Routing:** Rewrites all other requests to `/index.html` to support React Router's client-side navigation.
 
-## What technologies are used for this project?
+### 2. Environment Variables
+When deploying to Vercel, you must add the following Environment Variables in the Vercel Project Settings (Settings > Environment Variables):
+- `EMAIL_USER`: The SMTP email address (e.g., `info@prismconsulting.ai`)
+- `EMAIL_PASS`: The SMTP password
+- `EMAIL_TO`: The destination email to receive contact form submissions
 
-This project is built with:
+### 3. Build Command
+Vercel should automatically detect the Vite project. If not, ensure the settings are:
+- **Framework Preset:** Vite
+- **Build Command:** `npm run build`
+- **Output Directory:** `dist`
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+---
 
-## How can I deploy this project?
+## ✉️ Contact Form Configuration (Hostinger SMTP)
 
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
+The contact form is powered by Nodemailer inside a Vercel Serverless function. To switch or update the SMTP provider (currently configured for Hostinger), edit `api/send-email.js`:
 
-## Can I connect a custom domain to my Lovable project?
+```javascript
+const transporter = nodemailer.createTransport({
+  host: "smtp.hostinger.com", // Or smtp.gmail.com
+  port: 465,
+  secure: true,
+  auth: {
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS,
+  },
+});
+```
 
-Yes, you can!
+---
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+## 🎨 Theme & Styling
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+The project uses Tailwind CSS for styling. The color palette (Primary blues, Accent teals/greens) is defined globally using CSS variables in `src/index.css` and mapped in `tailwind.config.ts`.
+
+To change the core brand colors, simply update the CSS variables in `src/index.css`:
+```css
+:root {
+  --primary: 222 47% 11%;
+  --primary-foreground: 210 40% 98%;
+  --accent: 173 80% 40%;
+  --accent-foreground: 0 0% 100%;
+  /* ... */
+}
+```
+
+---
+
+*This project was bootstrapped and iterated upon. The initial scaffold was generated via Lovable, followed by custom architectural implementations for serverless email handling, routing, and component optimization.*
